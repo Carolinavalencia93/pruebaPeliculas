@@ -1,0 +1,70 @@
+package com.example.pysta;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.pysta.dataAccess.Endpoints;
+import com.example.pysta.dataAccess.RetrofitClientInstance;
+import com.example.pysta.models.Clientes;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class Pedidos extends AppCompatActivity {
+    String[] fruits = {"Daniela Galindo", "Andres Garcia", "Maria del mar Rojas", "Liliana Linarez", "Felipe Gomez" };
+    String[] Productos = {"AMBIENTADOR 80ml (tabaco cubano)", "AMBIENTADOR 80ml (citrus)", "DESENGRASANTE BIO", "DUCHA GRAFITADA CUÑETE", "GRASA DE LITIO 60ml" };
+    private EditText CantidadPrducto,edtDescripccion;
+    private TextView ValorproductoTotal,configProducto,listaProductos,nameProducto,textValorTotal;
+    private CardView cardsPedidos;
+    private ImageView imgDelete,imgCheck;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager recyclerViewLayoutManager;
+    private Context context;
+    private JSONArray pedidosArray = new JSONArray();
+    private MuaAdapter adapterPedidos;
+    private RadioGroup opciones;
+    private RadioGroup radioGroupTipoLugar;
+    private RadioButton radio_credito, radio_contado ;
+    private LinearLayout linearcheckbox;
+    boolean checkContado,checkCredito ,checkedkContado, checkedkCredito,estado ;
+    private Button btnEnviarPedido;
+    priva

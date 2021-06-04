@@ -1,0 +1,135 @@
+package com.example.pysta;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.pysta.dataAccess.Endpoints;
+import com.example.pysta.dataAccess.RetrofitClientInstance;
+import com.example.pysta.models.Clientes;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class Pedidos extends AppCompatActivity {
+    String[] fruits = {"Daniela Galindo", "Andres Garcia", "Maria del mar Rojas", "Liliana Linarez", "Felipe Gomez" };
+    String[] Productos = {"AMBIENTADOR 80ml (tabaco cubano)", "AMBIENTADOR 80ml (citrus)", "DESENGRASANTE BIO", "DUCHA GRAFITADA CUÑETE", "GRASA DE LITIO 60ml" };
+    private EditText CantidadPrducto,edtDescripccion;
+    private TextView ValorproductoTotal,configProducto,listaProductos,nameProducto,textValorTotal;
+    private CardView cardsPedidos;
+    private ImageView imgDelete,imgCheck;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager recyclerViewLayoutManager;
+    private Context context;
+    private JSONArray pedidosArray = new JSONArray();
+    private MuaAdapter adapterPedidos;
+    private RadioGroup opciones;
+    private RadioGroup radioGroupTipoLugar;
+    private RadioButton radio_credito, radio_contado ;
+    private LinearLayout linearcheckbox;
+    boolean checkContado,checkCredito ,checkedkContado, checkedkCredito,estado ;
+    private Button btnEnviarPedido;
+    private JSONArray clientesArray = new JSONArray();
+    private MuaAdapter adapter;
+    private Adapter adapterVie;
+    private AutoCompleteTextView actv;
+    private List<String> listaClientes = new ArrayList<>();
+    private   JSONArray jsonArrayClientes;
+    private int idClientePedido;
+    private JSONObject ArrayPedidos;
+    private Map <String, Pedido> jugadores = new TreeMap<String, Pedido>();
+    private String nombreProductoSelecionado;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pedidos);
+
+        //reciclerView
+        mRecyclerView = findViewById(R.id.recyclerViewPedidos);
+        recyclerViewLayoutManager = new GridLayoutManager(context, 1);
+        mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+
+
+        obtenerClientes();
+
+
+
+        //textView y editext
+        cardsPedidos = findViewById(R.id.cardsPedidos);
+        imgDelete = findViewById(R.id.imgDelete);
+        imgCheck = findViewById(R.id.imgCheck);
+        configProducto = findViewById(R.id.configProducto);
+        listaProductos = findViewById(R.id.listaProductos);
+        linearcheckbox = findViewById(R.id.linearcheckbox);
+        nameProducto = findViewById(R.id.nameProducto);
+        edtDescripccion = findViewById(R.id.edtDescripccion);
+        btnEnviarPedido = findViewById(R.id.btnLogin);
+        textValorTotal = findViewById(R.id.textValorTotal);
+
+        //Creating the instance of ArrayAdapter containing list of fruit names
+
+        //Getting the instance of AutoCompleteTextView
+        actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        actv.setThreshold(1);//will start working from first character
+
+        actv.setTextColor(Color.RED);
+
+        actv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+              //  cardsPedidos.setVisibility(View.VISIBLE);
+               // configProducto.setVisibility(View.VISIBLE);
+                String clienteSeleccionado = String.valueOf(parent.getItemAtPosition(position));
+
+                //   if (clienteSeleccionado)
+
+                Log.v("Palabra", String.valueOf(parent.getItemAtPosition(position)));
+
+                for (int i = 0; i < jsonArrayClientes.length(); i++) {
+                    JSONObject jsonObjectClientes = null;
+                    try {
+                        jsonObjectClientes = jsonArrayClientes.getJSONObject(i);
+
+                

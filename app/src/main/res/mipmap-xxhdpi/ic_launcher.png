@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoreversa"
+    >
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/ic_flecha_hacia_la_izquierda"
+                    android:foregroundGravity="right"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="8dp" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textColor="#fff"
+                    android:textStyle="bold|italic"
+                    android:text="@string/Pedidos"
+                    android:gravity="center_horizontal" />
+
+
+
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:background="#fff"
+                app:cardCornerRadius="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="15px"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Cliente"
+                        android:layout_marginTop="5dp"
+                        android:textSize="19sp"
+                        android:fontFamily="@font/mo_re"
+                        />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/rounded_button"
+                        android:gravity="center"
+                        android:fontFamily="@font/mo_re"
+                        android:drawableLeft="@drawable/ic_baseline_search_24"
+                        android:hint="@string/BuscarCliente"
+                        android:imeOptions="actionDone|actionSend"
+                        android:inputType="text"
+                        android:paddingHorizontal="10dp"
+                        android:singleLine="true"
+                        android:textAlignment="textStart"
+                        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Descripccion"
+                        android:layout_marginTop="10dp"
+                        android:textSize="19sp"
+                        android:fontFamily="@font/mo_re"
+                        />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteDescripccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rounded_button"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="15dp"
+                        android:drawableLeft="@drawable/ic_baseline_search_24"
+                        android:hint="@string/BuscarProducto"
+                        android:fontFamily="@font/mo_re"
+                        android:imeOptions="actionDone|actionSend"
+                        android:inputType="text"
+                        android:paddingHorizontal="10dp"
+                        android:singleLine="true"
+                        android:textAlignment="textStart"
+                        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/configProducto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Configuración de producto"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/mo_re"
+                        android:textSize="19sp"
+                        android:visibility="gone"
+
+                        />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardsPedidos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:background="@color/colorPrimary"
+                        app:cardCornerRadius="10dp">
+                        <LinearLayout
+                            android:id="@+id/linearLayoutInformationRoute"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+
+                            android:layout_marginEnd="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+
+                            <LinearLayout
+                                android:layout_width="209dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+         
